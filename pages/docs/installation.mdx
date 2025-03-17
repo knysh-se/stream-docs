@@ -1,75 +1,186 @@
+
+---
+title: Installation
+---
+
 # Installation
 
-This section provides detailed instructions for setting up the project and configuring the environment.
+This project includes the following components generated from OpenAPI specification:
+
+- **Client SDK** – A PHP client for integrating with the streaming video service API.
+- **Server Stub** – A PHP server stub based on the Laravel framework.
+
+Both components were generated using **OpenAPI Generator** (`openapi-generator-cli.jar`) based on the OpenAPI specification file (`openapi.yaml`).
 
 ## Prerequisites
 
-- PHP 7.2 or higher
-- Composer installed
-- OpenAPI Generator (if you want to regenerate SDKs)
+### PHP Requirements
+- PHP 7.4 or newer for the client
+- PHP 7.2.5 or newer for the server
+
+### Additional Tools
+- Composer (https://getcomposer.org/) for dependency management
+- OpenAPI Generator (https://openapi-generator.tech) for code generation
+
+---
 
 ## Installation Steps
 
-1. **Clone the Repository:**
+### 1. Clone the Repository
 
-   ```bash
-   git clone <repository_url>
-   cd <project_directory>
-   ```
+Clone the repository and navigate to the project folder:
 
-2. **Install Dependencies:**
+```bash
+git clone https://github.com/knysh-se/learning-openapi-gen.git
+cd learning-openapi-gen
+```
 
-   Run the following command to install PHP dependencies:
-   
-   ```bash
-   composer install
-   ```
+### 2. Install OpenAPI Generator
+Download OpenAPI Generator CLI:
 
-3. **Configure Environment:**
+```bash
+wget https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/7.9.0/openapi-generator-cli-7.9.0.jar -O openapi-generator-cli.jar
+```
 
-   - Copy the `.env.example` file to `.env`:
-     
-     ```bash
-     cp .env.example .env
-     ```
-     
-   - Generate the application key:
-     
-     ```bash
-     php artisan key:generate
-     ```
+Alternatively, you can use:
 
-4. **Set API Key:**
+```bash
+java -jar openapi-generator-cli.jar help
+```
 
-   Update the `.env` file with your API key:
+---
 
-   ```
-   API_KEY=your_api_key_here
-   ```
+## Client Installation
 
-5. **Run Migrations:**
+### 1. Install Dependencies
+Navigate to the `php-client` directory and install dependencies using Composer:
 
-   If the project uses a database, run migrations:
+```bash
+cd php-client
+composer install
+```
 
-   ```bash
-   php artisan migrate
-   ```
+### 2. Include the Client SDK in Your Code
 
-6. **Start Development Server:**
+You can manually include the generated client like this:
 
-   Start the Laravel development server:
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
 
-   ```bash
-   php artisan serve
-   ```
+$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
 
-The application will be available at [http://localhost:8000](http://localhost:8000).
+$apiInstance = new OpenAPI\Client\Api\DefaultApi(
+    new GuzzleHttp\Client(),
+    $config
+);
 
-## OpenAPI Documentation and SDK Generation
+try {
+    $result = $apiInstance->moviesGet();
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->moviesGet: ', $e->getMessage(), PHP_EOL;
+}
+```
 
-The project includes an OpenAPI specification file (`openapi.yaml`) that describes the API for the streaming video service (entities **Movie** and **Review**).  
-Using this file, the following are generated:
-- **Client SDK**: for integrating with the API.
-- **Server Stub**: (e.g., in Laravel) for further API development.
+### 3. Test the Client SDK
+To run the tests:
+
+```bash
+vendor/bin/phpunit
+```
+
+---
+
+## Server Installation
+
+### 1. Install Dependencies
+Navigate to the `php-server` directory and install dependencies:
+
+```bash
+cd php-server
+composer install
+```
+
+### 2. Setup Environment
+Create the `.env` file and generate the application key:
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+### 3. Start the Server
+Run the Laravel server:
+
+```bash
+php artisan serve
+```
+
+The server will be available at:
+
+```
+http://localhost:8000/api/v1
+```
+
+---
+
+## API Endpoints
+
+All URIs are relative to **http://localhost:8000/api/v1**.
+
+| Class | Method | HTTP request | Description |
+|-------|--------|--------------|-------------|
+| **DefaultApi** | `moviesGet` | `GET /movies` | Get a list of all movies |
+| **DefaultApi** | `moviesMovieIdDelete` | `DELETE /movies/{movieId}` | Delete movie |
+| **DefaultApi** | `moviesMovieIdGet` | `GET /movies/{movieId}` | Get movie by ID |
+| **DefaultApi** | `moviesMovieIdPut` | `PUT /movies/{movieId}` | Update movie information |
+| **DefaultApi** | `moviesPost` | `POST /movies` | Create a new movie |
+| **DefaultApi** | `reviewsGet` | `GET /reviews` | Get list of reviews |
+| **DefaultApi** | `reviewsPost` | `POST /reviews` | Create a new review |
+| **DefaultApi** | `reviewsReviewIdDelete` | `DELETE /reviews/{reviewId}` | Delete review |
+| **DefaultApi** | `reviewsReviewIdGet` | `GET /reviews/{reviewId}` | Get review by ID |
+| **DefaultApi** | `reviewsReviewIdPut` | `PUT /reviews/{reviewId}` | Update review |
+
+---
+
+## Authorization
+
+### API Key Authentication
+The API uses an API key for authorization.
+
+- **Type:** API key  
+- **Header Parameter:** `X-API-KEY`  
+- **Location:** HTTP header  
+
+Example:
+
+```http
+GET /movies HTTP/1.1
+Host: localhost:8000
+X-API-KEY: YOUR_API_KEY
+```
+
+---
+
+## Tests
+
+To run the tests, use:
+
+```bash
+cd php-client
+composer install
+vendor/bin/phpunit
+```
+
+---
+
+## About this Project
+This project was generated using the [OpenAPI Generator](https://openapi-generator.tech) with the following options:
+
+- **API version:** 1.0.0  
+- **Generator version:** 7.9.0  
+- **Language:** PHP  
+- **Framework:** Laravel (server), PHP SDK (client)  
 
 ---
