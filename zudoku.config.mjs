@@ -12,16 +12,16 @@ const config = {
                 type: "category",
                 label: "Documentation",
                 items: [
-                    "/stream-docs/docs/installation",
-                    "/stream-docs/docs/authorization",
-                    "/stream-docs/docs/about"
+                    "/docs/installation",
+                    "/docs/authorization",
+                    "/docs/about"
                 ]
             }
         ]
     },
     redirects: [
-        { from: "/", to: "/stream-docs/docs/installation" },
-        { from: "/about", to: "/stream-docs/docs/about" }
+        { from: "/", to: "/docs/installation" },
+        { from: "/about", to: "/docs/about" }
     ],
     apis: {
         type: "file",

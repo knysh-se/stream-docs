@@ -8,13 +8,15 @@ info:
 servers:
   - url: http://localhost:8000/api/v1
 
+# ✅ Вынес security на глобальный уровень
 security:
   - ApiKeyAuth: []
 
 paths:
   /movies:
     get:
-      summary: Get a list of all movies
+      summary: Retrieve a list of all available movies
+      operationId: getAllMovies
       security:
         - ApiKeyAuth: []
       responses:
@@ -31,7 +33,8 @@ paths:
         '500':
           description: Internal Server Error
     post:
-      summary: Create a new movie
+      summary: Add a new movie to the catalog
+      operationId: createMovie
       security:
         - ApiKeyAuth: []
       requestBody:
@@ -56,7 +59,8 @@ paths:
 
   /movies/{movieId}:
     get:
-      summary: Get movie by ID
+      summary: Retrieve details of a specific movie
+      operationId: getMovieById
       security:
         - ApiKeyAuth: []
       parameters:
@@ -79,7 +83,8 @@ paths:
         '500':
           description: Internal Server Error
     put:
-      summary: Update movie information
+      summary: Update information of an existing movie
+      operationId: updateMovie
       security:
         - ApiKeyAuth: []
       parameters:
@@ -110,7 +115,8 @@ paths:
         '500':
           description: Internal Server Error
     delete:
-      summary: Delete movie
+      summary: Remove an existing movie
+      operationId: deleteMovie
       security:
         - ApiKeyAuth: []
       parameters:
@@ -131,7 +137,8 @@ paths:
 
   /reviews:
     get:
-      summary: Get list of reviews
+      summary: Retrieve all reviews for movies
+      operationId: getAllReviews
       security:
         - ApiKeyAuth: []
       parameters:
@@ -154,7 +161,8 @@ paths:
         '500':
           description: Internal Server Error
     post:
-      summary: Create a new review
+      summary: Add a new review for a movie
+      operationId: createReview
       security:
         - ApiKeyAuth: []
       requestBody:
@@ -179,7 +187,8 @@ paths:
 
   /reviews/{reviewId}:
     get:
-      summary: Get review by ID
+      summary: Retrieve a specific review by ID
+      operationId: getReviewById
       security:
         - ApiKeyAuth: []
       parameters:
@@ -202,7 +211,8 @@ paths:
         '500':
           description: Internal Server Error
     put:
-      summary: Update review
+      summary: Update details of an existing review
+      operationId: updateReview
       security:
         - ApiKeyAuth: []
       parameters:
@@ -233,7 +243,8 @@ paths:
         '500':
           description: Internal Server Error
     delete:
-      summary: Delete review
+      summary: Remove an existing review
+      operationId: deleteReview
       security:
         - ApiKeyAuth: []
       parameters:
