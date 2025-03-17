@@ -1,6 +1,6 @@
 /** @type {import('zudoku').ZudokuConfig} */
 const config = {
-    basePath: "/learning-openapi-gen/streaming-api-documentation/",
+    basePath: "/stream-docs/",
     topNavigation: [
         {id: "docs", label: "Documentation"},
         {id: "api", label: "API Reference"},
