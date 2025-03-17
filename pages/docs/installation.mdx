@@ -120,44 +120,6 @@ http://localhost:8000/api/v1
 
 ---
 
-## API Endpoints
-
-All URIs are relative to **http://localhost:8000/api/v1**.
-
-| Class | Method | HTTP request | Description |
-|-------|--------|--------------|-------------|
-| **DefaultApi** | `moviesGet` | `GET /movies` | Get a list of all movies |
-| **DefaultApi** | `moviesMovieIdDelete` | `DELETE /movies/{movieId}` | Delete movie |
-| **DefaultApi** | `moviesMovieIdGet` | `GET /movies/{movieId}` | Get movie by ID |
-| **DefaultApi** | `moviesMovieIdPut` | `PUT /movies/{movieId}` | Update movie information |
-| **DefaultApi** | `moviesPost` | `POST /movies` | Create a new movie |
-| **DefaultApi** | `reviewsGet` | `GET /reviews` | Get list of reviews |
-| **DefaultApi** | `reviewsPost` | `POST /reviews` | Create a new review |
-| **DefaultApi** | `reviewsReviewIdDelete` | `DELETE /reviews/{reviewId}` | Delete review |
-| **DefaultApi** | `reviewsReviewIdGet` | `GET /reviews/{reviewId}` | Get review by ID |
-| **DefaultApi** | `reviewsReviewIdPut` | `PUT /reviews/{reviewId}` | Update review |
-
----
-
-## Authorization
-
-### API Key Authentication
-The API uses an API key for authorization.
-
-- **Type:** API key  
-- **Header Parameter:** `X-API-KEY`  
-- **Location:** HTTP header  
-
-Example:
-
-```http
-GET /movies HTTP/1.1
-Host: localhost:8000
-X-API-KEY: YOUR_API_KEY
-```
-
----
-
 ## Tests
 
 To run the tests, use:
@@ -167,15 +129,5 @@ cd php-client
 composer install
 vendor/bin/phpunit
 ```
-
----
-
-## About this Project
-This project was generated using the [OpenAPI Generator](https://openapi-generator.tech) with the following options:
-
-- **API version:** 1.0.0  
-- **Generator version:** 7.9.0  
-- **Language:** PHP  
-- **Framework:** Laravel (server), PHP SDK (client)  
 
 ---
