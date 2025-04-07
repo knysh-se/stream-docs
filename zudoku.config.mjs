@@ -4,6 +4,7 @@ const config = {
     topNavigation: [
         {id: "docs", label: "Documentation"},
         {id: "api", label: "API Reference"},
+        {id: "news-aggregator-srs", label: "News Aggregator SRS"},
         {id: "about", label: "About"}
     ],
     sidebar: {
@@ -14,6 +15,7 @@ const config = {
                 items: [
                     "/docs/installation",
                     "/docs/authorization",
+                    "/docs/news-aggregator-srs",
                     "/docs/about"
                 ]
             }
@@ -21,6 +23,7 @@ const config = {
     },
     redirects: [
         { from: "/", to: "/docs/installation" },
+        { from: "/news-aggregator-srs", to: "/docs/news-aggregator-srs" },
         { from: "/about", to: "/docs/about" }
     ],
     apis: {
